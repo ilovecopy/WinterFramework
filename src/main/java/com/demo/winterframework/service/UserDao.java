@@ -10,5 +10,6 @@ import com.demo.winterframework.spring.annotation.Component;
  */
 @Component
 public class UserDao {
-
+    @Autowired
+    private UserService userService;
 }

@@ -8,7 +8,7 @@ public enum ScopeEnum {
 
     单例("单例", "singleton"),
 
-    多例("多例", "multipleCases");
+    多例("多例", "prototype");
     /**
      * 名称
      */
