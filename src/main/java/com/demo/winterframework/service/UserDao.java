@@ -12,4 +12,12 @@ import com.demo.winterframework.spring.annotation.Component;
 public class UserDao {
     @Autowired
     private UserService userService;
+    @Autowired
+    public void setUserService(UserService userService) {
+        System.out.println("useDao依赖注入setUserService"+userService.getClass().getName());
+        this.userService = userService;
+    }
+    public void print(){
+        System.out.println("userDao.print");
+    }
 }

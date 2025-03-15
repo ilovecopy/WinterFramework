@@ -1,6 +1,5 @@
 package com.demo.winterframework.spring.interfaces;
 
-import org.springframework.beans.BeansException;
 
 public interface BeanPostProcessor {
     /**

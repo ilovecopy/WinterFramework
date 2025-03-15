@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
  * @author tangjincheng
  * @date 2025/03/08
  */
-@Target(ElementType.FIELD)
+@Target({ElementType.FIELD,ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Autowired {
 }

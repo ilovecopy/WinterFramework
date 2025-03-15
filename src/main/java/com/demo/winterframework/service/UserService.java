@@ -11,7 +11,7 @@ import org.springframework.beans.factory.BeanNameAware;
 @Scope(scope = ScopeEnum.单例)
 public class UserService implements BeanNameAware, InitializingBean, UserServiceInterface {
 
-    @Autowired
+//    @Autowired
     private UserDao userDao;
     @Override
     public void test() {
@@ -26,5 +26,10 @@ public class UserService implements BeanNameAware, InitializingBean, UserService
     @Override
     public void setBeanName(String beanName) {
         System.out.println("useService的BeanNameAware执行：" + beanName);
+    }
+    @Autowired
+    public void setUserDao(UserDao userDao) {
+        System.out.println("Userservice依赖注入setUserDao");
+        this.userDao = userDao;
     }
 }

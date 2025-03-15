@@ -18,6 +18,8 @@ import org.springframework.beans.factory.config.SmartInstantiationAwareBeanPostP
 import java.beans.Introspector;
 import java.io.File;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
@@ -246,10 +248,17 @@ public class WinterContextImpl implements WinterContext {
      * @param beanDefinition
      * @param instance
      */
-    private void populateBean(String beanName, BeanDefinition beanDefinition, Object instance) throws IllegalAccessException {
+    private void populateBean(String beanName, BeanDefinition beanDefinition, Object instance) throws IllegalAccessException, InvocationTargetException {
         //解决bean的依赖注入
         System.out.println("😋😋😋😋 依赖注入阶段：" + beanName + ", class = " + instance.getClass().getName());
-        //获取所有属性
+        //解析方法上的Autowired
+        for (Method method : instance.getClass().getDeclaredMethods()) {
+            if (method.isAnnotationPresent(Autowired.class)) {
+                String paramName = method.getParameters()[0].getName();
+                method.invoke(instance,getBeanByName(paramName));
+            }
+        }
+        //解析字段上的Autowired
         Field[] fields = beanDefinition.getClass().getDeclaredFields();
         for (Field field : fields) {
             //如果当前属性存在Autowired注解
